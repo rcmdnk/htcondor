@@ -22,6 +22,7 @@ class htcondor::params {
   # for more information see https://research.cs.wisc.edu/htcondor/privacy.html
   $enable_condor_reporting        = hiera('enable_condor_reporting', true)
   $enable_cgroup                  = hiera('enable_cgroup', false)
+  $proportional_swap_assignment   = hiera('proportional_swap_assignment', false)
   $enable_multicore               = hiera('enable_multicore', false)
   $enable_healthcheck             = hiera('enable_healthcheck', false)
 

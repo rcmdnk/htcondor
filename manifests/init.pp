@@ -119,6 +119,7 @@ class htcondor (
   $use_debug_notify               = $htcondor::params::use_debug_notify,
   $enable_condor_reporting        = $htcondor::params::enable_condor_reporting,
   $enable_cgroup                  = $htcondor::params::enable_cgroup,
+  $proportional_swap_assignment   = $htcondor::params::proportional_swap_assignment,
   $enable_multicore               = $htcondor::params::enable_multicore,
   $enable_healthcheck             = $htcondor::params::enable_healthcheck,
   $htcondor_cgroup                = $htcondor::params::htcondor_cgroup,

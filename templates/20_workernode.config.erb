@@ -43,7 +43,11 @@ STARTD_CRON_WN_HEALTHCHECK_KILL = true
 ## When is this node willing to run jobs?
 START = (NODE_IS_HEALTHY =?= True) && (StartJobs =?= True)
 <% else -%>
+<% if @start != "" -%>
+START = <%= @start %>
+<% else -%>
 START = TRUE
+<% end -%>
 <% end -%>
 SUSPEND = FALSE
 CONTINUE = TRUE
@@ -77,9 +81,6 @@ SLOT_TYPE_<%= slot_num %>_PARTITIONABLE  = <%= slot_data['partitionable'] %>
 
 <% end -%>
 <% end -%>
-<% if @start != "" -%>
-START = <%= @start %>
-<% end %>
 ## Without this lots of memory (& hence job slots) will be wasted
 MODIFY_REQUEST_EXPR_REQUESTMEMORY = quantize(RequestMemory,100)
 
@@ -132,6 +133,9 @@ MAX_NUM_STARTD_LOG = 10
 # Enable CGROUP
 BASE_CGROUP = <%= @htcondor_cgroup %>
 CGROUP_MEMORY_LIMIT_POLICY = soft
+<%- if @proportional_swap_assignment -%>
+PROPORTIONAL_SWAP_ASSIGNMENT = true
+<%- end -%>
 <%- end -%>
 
 ## Debugging

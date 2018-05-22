@@ -159,6 +159,7 @@ class htcondor (
   $htcondor::params::max_periodic_expr_interval,
   $remove_held_jobs_after         = $htcondor::params::remove_held_jobs_after,
   $leave_job_in_queue             = $htcondor::params::leave_job_in_queue,
+  $use_x509userproxy              = $htcondor::params::use_x509userproxy,
   $ganglia_cluster_name           = $htcondor::params::ganglia_cluster_name,
   $pool_password                  = $htcondor::params::pool_password_file,
   $uid_domain                     = $htcondor::params::uid_domain,

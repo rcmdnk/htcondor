@@ -15,6 +15,7 @@ class htcondor::config::common {
   $include_username_in_accounting = $htcondor::include_username_in_accounting
 
   $leave_job_in_queue             = $htcondor::leave_job_in_queue
+  $use_x509userproxy              = $htcondor::use_x509userproxy
   $request_memory                 = $htcondor::request_memory
 
   $template_config_local          = $htcondor::template_config_local

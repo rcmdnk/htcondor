@@ -89,6 +89,7 @@ class htcondor::params {
   $max_periodic_expr_interval     = hiera('max_periodic_expr_interval', 1200)
   $remove_held_jobs_after         = hiera('remove_held_jobs_after', 1200)
   $leave_job_in_queue             = hiera('leave_job_in_queue', false)
+  $use_x509userproxy              = hiera('use_x509userproxy', false)
   $max_walltime                   = hiera('max_walltime', '80 * 60 * 60')
   $max_cputime                    = hiera('max_cputime', '80 * 60 * 60')
   $memory_factor                  = hiera('memory_factor', '1000')

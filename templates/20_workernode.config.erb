@@ -64,16 +64,22 @@ NUM_SLOTS_TYPE_1          = 1
 SLOT_TYPE_1_PARTITIONABLE = TRUE
 <% end -%>
 <% if @slots.length > 0 -%>
+## Overcommit memory and  quantize the detected memory
+MEMORY = <%= @memory_overcommit  %> * quantize( $(DETECTED_MEMORY), 1000 )
+
+## Slots definitions
 NUM_SLOTS = <%= @slots.length %>
+
 <% @slots.each_pair do |slot_num, slot_data| -%>
-SLOT_TYPE_<%= @slot_num %>                = slot_data['type']
-NUM_SLOTS_TYPE_<%= @slot_num %>                = slot_data['num']
-SLOT_TYPE_<%= @slot_num %>_PARTITIONABLE = slot_data['partitionable']
+SLOT_TYPE_<%= slot_num %>                = <%= slot_data['type'] %>
+NUM_SLOTS_TYPE_<%= slot_num %>           = <%= slot_data['num'] %>
+SLOT_TYPE_<%= slot_num %>_PARTITIONABLE  = <%= slot_data['partitionable'] %>
+
 <% end -%>
 <% end -%>
 <% if @start != "" -%>
 START = <%= @start %>
-<% end -%>
+<% end %>
 ## Without this lots of memory (& hence job slots) will be wasted
 MODIFY_REQUEST_EXPR_REQUESTMEMORY = quantize(RequestMemory,100)
 

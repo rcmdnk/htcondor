@@ -141,6 +141,8 @@ class htcondor (
   $managers                       = $htcondor::params::managers,
   $number_of_cpus                 = $htcondor::params::number_of_cpus,
   $partitionable_slots            = $htcondor::params::partitionable_slots,
+  $slots                          = $htcondor::params::slots,
+  $start                          = $htcondor::params::start,
   $memory_overcommit              = $htcondor::params::memory_overcommit,
   $request_memory                 = $htcondor::params::request_memory,
   $starter_job_environment        = $htcondor::params::starter_job_environment,

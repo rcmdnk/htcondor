@@ -19,6 +19,7 @@ class htcondor::config::worker {
   $number_of_cpus            = $htcondor::number_of_cpus
   $partitionable_slots       = $htcondor::partitionable_slots
   $slots                     = $htcondor::slots
+  $memory                    = $htcondor::memory
   $start                     = $htcondor::start
   $starter_job_environment   = $htcondor::starter_job_environment
   $manage_selinux            = $htcondor::manage_selinux

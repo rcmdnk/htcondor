@@ -71,7 +71,7 @@ class htcondor::params {
     ])
 
   $partitionable_slots            = hiera('partitionable_slots', true)
-  $slots                          = hiera('num_slots', {})
+  $slots                          = hiera('slots', {})
   $start                          = hiera('start', "")
   $memory_overcommit              = hiera('memory_overcommit', 1.5)
   $request_memory                 = hiera('request_memory', true)

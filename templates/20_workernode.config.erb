@@ -64,14 +64,14 @@ NUM_SLOTS_TYPE_1          = 1
 SLOT_TYPE_1_PARTITIONABLE = TRUE
 <% end -%>
 <% if @slots.length > 0 -%>
-NUM_SLOTS = <%= @num_slots.length %>
+NUM_SLOTS = <%= @slots.length %>
 <% @slots.each_pair do |slot_num, slot_data| -%>
 SLOT_TYPE_<%= @slot_num %>                = slot_data['type']
 NUM_SLOTS_TYPE_<%= @slot_num %>                = slot_data['num']
 SLOT_TYPE_<%= @slot_num %>_PARTITIONABLE = slot_data['partitionable']
 <% end -%>
 <% end -%>
-<% if @start > 0 -%>
+<% if @start != "" -%>
 START = <%= @start %>
 <% end -%>
 ## Without this lots of memory (& hence job slots) will be wasted

@@ -74,6 +74,7 @@ class htcondor::params {
   $partitionable_slots            = hiera('partitionable_slots', true)
   $slots                          = hiera('slots', {})
   $memory                         = hiera('memory', "")
+  $job_renice_increment           = hiera('job_renice_increment', 10)
   $start                          = hiera('start', "")
   $memory_overcommit              = hiera('memory_overcommit', 1.5)
   $request_memory                 = hiera('request_memory', true)

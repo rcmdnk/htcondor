@@ -20,6 +20,7 @@ class htcondor::config::worker {
   $partitionable_slots       = $htcondor::partitionable_slots
   $slots                     = $htcondor::slots
   $memory                    = $htcondor::memory
+  $job_renice_increment      = $htcondor::job_renice_increment
   $start                     = $htcondor::start
   $starter_job_environment   = $htcondor::starter_job_environment
   $manage_selinux            = $htcondor::manage_selinux

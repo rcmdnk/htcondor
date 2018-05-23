@@ -235,6 +235,11 @@ class htcondor (
   $singularity_image_expr         = $htcondor::params::singularity_image_expr,
   $singularity_bind_paths         = $htcondor::params::singularity_bind_paths,
   $singularity_target_dir         = $htcondor::params::singularity_target_dir,
+  $defrag_interval                = $htcondor::params::defrag_interval,
+  $defrag_draining_machines_per_hour = $htcondor::params::defrag_draining_machines_per_hour,
+  $defrag_max_concurrent_draining = $htcondor::params::defrag_max_concurrent_draining,
+  $defrag_max_whole_machines      = $htcondor::params::defrag_max_whole_machines,
+  $defrag_schedule                = $htcondor::params::defrag_schedule,
 ) inherits
 ::htcondor::params {
   if $install_repositories {

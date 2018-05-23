@@ -18,6 +18,12 @@ class htcondor::config::manager {
   # /etc/condor/config.d/22_manager.config
   $collector_name        = $htcondor::collector_name
   $daemon_list           = $htcondor::config::daemon_list
+  # /etc/condor/config.d/30_defrag.config
+  $defrag_interval                   = $htcondor::defrag_interval
+  $defrag_draining_machines_per_hour = $htcondor::defrag_draining_machines_per_hour
+  $defrag_max_concurrent_draining    = $htcondor::defrag_max_concurrent_draining
+  $defrag_max_whole_machines         = $htcondor::defrag_max_whole_machines
+  $defrag_schedule                   = $htcondor::defrag_schedule
   # template files
   $template_defrag       = $htcondor::template_defrag
   $template_fairshares   = $htcondor::template_fairshares

@@ -162,6 +162,13 @@ class htcondor::params {
   $singularity_bind_paths         = hiera_array('singularity_bind_paths', 'SingularityBind')
   $singularity_target_dir         = hiera('singularity_target_dir', '')
 
+  # Defrag settings
+  $defrag_interval                = hiera('defrag_interval', 600)
+  $defrag_draining_machines_per_hour = hiera('defrag_draining_machines_per_hour', 60)
+  $defrag_max_concurrent_draining = hiera('defrag_max_concurrent_draining', 8)
+  $defrag_max_whole_machines      = hiera('defrag_max_whole_machines', 20)
+  $defrag_schedule                = hiera('defrag_schedule', "graceful")
+
   # notification settings
   $admin_email                    = hiera('admin_email', 'localhost')
   $email_domain                   = hiera('email_domain', 'localhost')

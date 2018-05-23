@@ -58,8 +58,10 @@ KILL = FALSE
 ## (as opposed to killing it instantaneously)
 PREEMPT = FALSE
 <% if @partitionable_slots -%>
+<% if @memory == "" -%>
 ## Overcommit memory and  quantize the detected memory
 MEMORY = <%= @memory_overcommit  %> * quantize( $(DETECTED_MEMORY), 1000 )
+<% end -%>
 
 ## Partitionable slots
 NUM_SLOTS = 1
@@ -80,7 +82,7 @@ SLOT_TYPE_<%= slot_num %>_PARTITIONABLE  = <%= slot_data['partitionable'] %>
 <% end -%>
 
 <% if @memory != "" -%>
-  MEMORY = <% @memory %>
+MEMORY = <%= @memory %>
 <% end -%>
 
 ## Without this lots of memory (& hence job slots) will be wasted

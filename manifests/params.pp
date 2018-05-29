@@ -1,30 +1,29 @@
 # htcondor::params
 class htcondor::params {
-  $schedulers                     = hiera_array('schedulers', [])
-  $managers                       = hiera_array('managers', [])
-  $workers                        = hiera_array('workers', [])
+  $schedulers                     = lookup('schedulers', {merge => unique, default_value => []})
+  $managers                       = lookup('managers', {merge => unique, default_value => []})
+  $workers                        = lookup('workers', {merge => unique, default_value => []})
 
-  $is_manager                     = hiera('is_manager', false)
-  $is_scheduler                   = hiera('is_scheduler', false)
-  $is_worker                      = hiera('is_worker', false)
+  $is_manager                     = lookup('is_manager', {default_value => false})
+  $is_scheduler                   = lookup('is_scheduler', {default_value => false})
+  $is_worker                      = lookup('is_worker', {default_value => false})
 
-  $cluster_has_multiple_domains   = hiera('cluster_has_multiple_domains', false)
-  $collector_name                 = hiera('collector_name', 'Personal Condor at $(FULL_HOSTNAME)'
-  )
-  $repo_priority                  = hiera('repo_priority', '99')
-  $condor_version                 = hiera('condor_version', 'present')
-  $custom_machine_attributes      = hiera_hash('custom_machine_attribute', {})
-  $custom_job_attributes          = hiera_hash('custom_job_attributes', {})
+  $cluster_has_multiple_domains   = lookup('cluster_has_multiple_domains', {default_value => false})
+  $collector_name                 = lookup('collector_name', {default_value => 'Personal Condor at $(FULL_HOSTNAME)'})
+  $repo_priority                  = lookup('repo_priority', {default_value => '99'})
+  $condor_version                 = lookup('condor_version', {default_value => 'present'})
+  $custom_machine_attributes      = lookup('custom_machine_attribute', {merge => hash, default_value => {}})
+  $custom_job_attributes          = lookup('custom_job_attributes', {merge => hash, default_value => {}})
 
-  $use_debug_notify               = hiera('use_debug_notify', true)
+  $use_debug_notify               = lookup('use_debug_notify', {default_value => true})
 
   # this is one of the funding requirements for HTCondor
   # for more information see https://research.cs.wisc.edu/htcondor/privacy.html
-  $enable_condor_reporting        = hiera('enable_condor_reporting', true)
-  $enable_cgroup                  = hiera('enable_cgroup', false)
-  $proportional_swap_assignment   = hiera('proportional_swap_assignment', false)
-  $enable_multicore               = hiera('enable_multicore', false)
-  $enable_healthcheck             = hiera('enable_healthcheck', false)
+  $enable_condor_reporting        = lookup('enable_condor_reporting', {default_value => true})
+  $enable_cgroup                  = lookup('enable_cgroup', {default_value => false})
+  $proportional_swap_assignment   = lookup('proportional_swap_assignment', {default_value => false})
+  $enable_multicore               = lookup('enable_multicore', {default_value => false})
+  $enable_healthcheck             = lookup('enable_healthcheck', {default_value => false})
 
 
   if $facts['os']['family'] == 'RedHat' and $facts['os']['release']['major'] == '7' {
@@ -33,10 +32,10 @@ class htcondor::params {
   else{
     $htcondor_cgroup_default = 'htcondor'
   }
-  $htcondor_cgroup                = hiera('htcondor_cgroup', $htcondor_cgroup_default)
+  $htcondor_cgroup                = lookup('htcondor_cgroup', {default_value => $htcondor_cgroup_default})
 
 
-  $high_priority_groups           = hiera_hash('high_priority_groups', undef)
+  $high_priority_groups           = lookup('high_priority_groups', {merge => hash, default_value => undef})
 
   $default_accounting_groups      = {
     'CMS'            => {
@@ -49,156 +48,132 @@ class htcondor::params {
       dynamic_quota   => 0.95,
     }
   }
-  $accounting_groups              = hiera_hash('accounting_groups',
-  $default_accounting_groups)
+  $accounting_groups              = lookup('accounting_groups', {merge => hash, default_value => $default_accounting_groups})
 
-  $priority_halflife              = hiera('priority_halflife', 43200)
-  $default_prio_factor            = hiera('default_prio_factor', 100000.00)
-  $group_accept_surplus           = hiera('group_accept_surplus', true)
-  $group_autoregroup              = hiera('group_autoregroup', true)
+  $priority_halflife              = lookup('priority_halflife', {default_value => 43200})
+  $default_prio_factor            = lookup('default_prio_factor', {default_value => 100000.00})
+  $group_accept_surplus           = lookup('group_accept_surplus', {default_value => true})
+  $group_autoregroup              = lookup('group_autoregroup', {default_value => true})
 
-  $health_check_script            = hiera('health_check_script', "puppet:///modules/${module_name}/healhcheck_wn_condor"
-  )
-  $include_username_in_accounting = hiera('include_username_in_accounting',
-  false)
-  $install_repositories           = hiera('install_repositories', true)
-  $gpgcheck                       = hiera('gpgcheck', true)
-  $gpgkey                         = hiera('gpgkey', 'http://htcondor.org/yum/RPM-GPG-KEY-HTCondor')
-  $dev_repositories               = hiera('dev_repositories', false)
+  $health_check_script            = lookup('health_check_script', {default_value => "puppet:///modules/${module_name}/healhcheck_wn_condor"})
+  $include_username_in_accounting = lookup('include_username_in_accounting', {default_value => false})
+  $install_repositories           = lookup('install_repositories', {default_value => true})
+  $gpgcheck                       = lookup('gpgcheck', {default_value => true})
+  $gpgkey                         = lookup('gpgkey', {default_value => 'http://htcondor.org/yum/RPM-GPG-KEY-HTCondor'})
+  $dev_repositories               = lookup('dev_repositories', {default_value => false})
 
-  $machine_owner                  = hiera('machine_owner', 'physics')
+  $machine_owner                  = lookup('machine_owner', {default_value => 'physics'})
 
-  $number_of_cpus                 = hiera('number_of_cpus', $::processors['count'
-    ])
+  $number_of_cpus                 = lookup('number_of_cpus', {default_value => $::processors['count' ]})
 
-  $partitionable_slots            = hiera('partitionable_slots', true)
-  $slots                          = hiera('slots', {})
-  $memory                         = hiera('memory', "")
-  $job_renice_increment           = hiera('job_renice_increment', 10)
-  $start                          = hiera('start', "")
-  $memory_overcommit              = hiera('memory_overcommit', 1.5)
-  $request_memory                 = hiera('request_memory', true)
+  $partitionable_slots            = lookup('partitionable_slots', {default_value => true})
+  $slots                          = lookup('slots', {default_value => {}})
+  $memory                         = lookup('memory', {default_value => ""})
+  $job_renice_increment           = lookup('job_renice_increment', {default_value => 10})
+  $start                          = lookup('start', {default_value => ""})
+  $memory_overcommit              = lookup('memory_overcommit', {default_value => 1.5})
+  $request_memory                 = lookup('request_memory', {default_value => true})
 
-  $starter_job_environment        = hiera_hash('starter_job_environment', {})
-  $manage_selinux                 = hiera('manage_selinux', true)
-  $pool_home                      = hiera('pool_home', '/pool')
-  $pool_create                    = hiera('pool_create', true)
-  $mount_under_scratch_dirs       = hiera_array('mount_under_scratch_dirs', ['/tmp', '/var/tmp'])
-  $queues                         = hiera('grid_queues', undef)
-  $periodic_expr_interval         = hiera('periodic_expr_interval', 60)
-  $max_periodic_expr_interval     = hiera('max_periodic_expr_interval', 1200)
-  $remove_held_jobs_after         = hiera('remove_held_jobs_after', 1200)
-  $leave_job_in_queue             = hiera('leave_job_in_queue', false)
-  $use_x509userproxy              = hiera('use_x509userproxy', false)
-  $max_walltime                   = hiera('max_walltime', '80 * 60 * 60')
-  $max_cputime                    = hiera('max_cputime', '80 * 60 * 60')
-  $memory_factor                  = hiera('memory_factor', '1000')
+  $starter_job_environment        = lookup('starter_job_environment', {merge => hash, default_value => {}})
+  $manage_selinux                 = lookup('manage_selinux', {default_value => true})
+  $pool_home                      = lookup('pool_home', {default_value => '/pool'})
+  $pool_create                    = lookup('pool_create', {default_value => true})
+  $mount_under_scratch_dirs       = lookup('mount_under_scratch_dirs', {merge => unique, default_value => ['/tmp', '/var/tmp']})
+  $queues                         = lookup('grid_queues', {default_value => undef})
+  $periodic_expr_interval         = lookup('periodic_expr_interval', {default_value => 60})
+  $max_periodic_expr_interval     = lookup('max_periodic_expr_interval', {default_value => 1200})
+  $remove_held_jobs_after         = lookup('remove_held_jobs_after', {default_value => 1200})
+  $leave_job_in_queue             = lookup('leave_job_in_queue', {default_value => false})
+  $use_x509userproxy              = lookup('use_x509userproxy', {default_value => false})
+  $max_walltime                   = lookup('max_walltime', {default_value => '80 * 60 * 60'})
+  $max_cputime                    = lookup('max_cputime', {default_value => '80 * 60 * 60'})
+  $memory_factor                  = lookup('memory_factor', {default_value => '1000'})
 
-  $ganglia_cluster_name           = hiera('ganglia_cluster_name', undef)
+  $ganglia_cluster_name           = lookup('ganglia_cluster_name', {default_value => undef})
 
-  $uid_domain                     = hiera('uid_domain', 'example.org')
-  $default_domain_name            = hiera('default_domain_name', $uid_domain)
-  $filesystem_domain              = hiera('filesystem_domain', $::fqdn)
+  $uid_domain                     = lookup('uid_domain', {default_value => 'example.org'})
+  $default_domain_name            = lookup('default_domain_name', {default_value => $uid_domain})
+  $filesystem_domain              = lookup('filesystem_domain', {default_value => $::fqdn})
 
-  $use_accounting_groups          = hiera('use_accounting_groups', false)
-  $use_htcondor_account_mapping   = hiera('use_htcondor_account_mapping', true)
+  $use_accounting_groups          = lookup('use_accounting_groups', {default_value => false})
+  $use_htcondor_account_mapping   = lookup('use_htcondor_account_mapping', {default_value => true})
 
   # service security
-  $condor_user                    = hiera('condor_user', root)
-  $condor_group                   = hiera('condor_group', root)
-  $condor_uid                     = hiera('condor_uid', 0)
-  $condor_gid                     = hiera('condor_gid', 0)
+  $condor_user                    = lookup('condor_user', {default_value => root})
+  $condor_group                   = lookup('condor_group', {default_value => root})
+  $condor_uid                     = lookup('condor_uid', {default_value => 0})
+  $condor_gid                     = lookup('condor_gid', {default_value => 0})
 
   # authentication
-  $use_anonymous_auth             = hiera('use_anonymous_auth', false)
-  $use_fs_auth                    = hiera('use_fs_auth', true)
-  $use_password_auth              = hiera('use_password_auth', true)
-  $use_kerberos_auth              = hiera('use_kerberos_auth', false)
-  $use_claim_to_be_auth           = hiera('use_claim_to_be_auth', false)
-  $use_ssl_auth                   = hiera('use_ssl_auth', false)
-  $use_cert_map_file              = hiera('use_cert_map_file', false)
-  $use_krb_map_file               = hiera('use_krb_map_file', false)
-  $use_pid_namespaces             = hiera('use_pid_namespaces', false)
-  $cert_map_file                  = hiera('cert_map_file', '/etc/condor/certificate_mapfile'
-  )
-  $cert_map_file_source           = hiera('cert_map_file_source', "puppet:///modules/${module_name}/certificate_mapfile"
-  )
-  $krb_map_file                   = hiera('krb_map_file', '/etc/condor/kerberos_mapfile'
-  )
-  $krb_map_file_template          = hiera('krb_map_file_template', "${module_name}/mapfile.kmap.erb"
-  )
-  $machine_list_prefix            = hiera('machine_list_prefix', 'condor_pool@$(UID_DOMAIN)/'
-  )
-  $pool_password_file             = hiera('pool_password_file', "puppet:///modules/${module_name}/pool_password"
-  )
-  $ssl_server_keyfile             = hiera('ssl_server_keyfile', '')
-  $ssl_client_keyfile             = hiera('ssl_client_keyfile', '')
-  $ssl_server_certfile            = hiera('ssl_server_certfile', '')
-  $ssl_client_certfile            = hiera('ssl_client_certfile', '')
-  $ssl_server_cafile              = hiera('ssl_server_cafile', '')
-  $ssl_client_cafile              = hiera('ssl_client_cafile', '')
-  $ssl_server_cadir               = hiera('ssl_server_cadir', '')
-  $ssl_client_cadir               = hiera('ssl_client_cadir', '')
+  $use_anonymous_auth             = lookup('use_anonymous_auth', {default_value => false})
+  $use_fs_auth                    = lookup('use_fs_auth', {default_value => true})
+  $use_password_auth              = lookup('use_password_auth', {default_value => true})
+  $use_kerberos_auth              = lookup('use_kerberos_auth', {default_value => false})
+  $use_claim_to_be_auth           = lookup('use_claim_to_be_auth', {default_value => false})
+  $use_ssl_auth                   = lookup('use_ssl_auth', {default_value => false})
+  $use_cert_map_file              = lookup('use_cert_map_file', {default_value => false})
+  $use_krb_map_file               = lookup('use_krb_map_file', {default_value => false})
+  $use_pid_namespaces             = lookup('use_pid_namespaces', {default_value => false})
+  $cert_map_file                  = lookup('cert_map_file', {default_value => '/etc/condor/certificate_mapfile'})
+  $cert_map_file_source           = lookup('cert_map_file_source', {default_value => "puppet:///modules/${module_name}/certificate_mapfile"})
+  $krb_map_file                   = lookup('krb_map_file', {default_value => '/etc/condor/kerberos_mapfile'})
+  $krb_map_file_template          = lookup('krb_map_file_template', {default_value => "${module_name}/mapfile.kmap.erb"})
+  $machine_list_prefix            = lookup('machine_list_prefix', {default_value => 'condor_pool@$(UID_DOMAIN)/'})
+  $pool_password_file             = lookup('pool_password_file', {default_value => "puppet:///modules/${module_name}/pool_password"})
+  $ssl_server_keyfile             = lookup('ssl_server_keyfile', {default_value => ''})
+  $ssl_client_keyfile             = lookup('ssl_client_keyfile', {default_value => ''})
+  $ssl_server_certfile            = lookup('ssl_server_certfile', {default_value => ''})
+  $ssl_client_certfile            = lookup('ssl_client_certfile', {default_value => ''})
+  $ssl_server_cafile              = lookup('ssl_server_cafile', {default_value => ''})
+  $ssl_client_cafile              = lookup('ssl_client_cafile', {default_value => ''})
+  $ssl_server_cadir               = lookup('ssl_server_cadir', {default_value => ''})
+  $ssl_client_cadir               = lookup('ssl_client_cadir', {default_value => ''})
 
   # for private networks
-  $uses_connection_broker         = hiera('uses_connection_broker', false)
-  $private_network_name           = hiera('private_network_name', $::domain)
+  $uses_connection_broker         = lookup('uses_connection_broker', {default_value => false})
+  $private_network_name           = lookup('private_network_name', {default_value => $::domain})
 
   # SharedPort service configuration
-  $use_shared_port                = hiera('use_shared_port', false)
-  $shared_port                    = hiera('shared_port', 9618)
-  $shared_port_collector_name     = hiera('shared_port_collector_name', 'collector')
+  $use_shared_port                = lookup('use_shared_port', {default_value => false})
+  $shared_port                    = lookup('shared_port', {default_value => 9618})
+  $shared_port_collector_name     = lookup('shared_port_collector_name', {default_value => 'collector'})
 
   # Custom logging config
-  $use_custom_logs                = hiera('use_custom_logs', false)
-  $log_to_syslog                  = hiera('log_to_syslog', false)
-  $logging_parameters             = hiera('logging_parameters', {})
+  $use_custom_logs                = lookup('use_custom_logs', {default_value => false})
+  $log_to_syslog                  = lookup('log_to_syslog', {default_value => false})
+  $logging_parameters             = lookup('logging_parameters', {default_value => {}})
 
   # Singularity configuration
-  $use_singularity                = hiera('use_singularity', false)
-  $singularity_path               = hiera('singularity_path', '/usr/bin/singularity')
-  $force_singularity_jobs         = hiera('force_singularity_jobs', false)
-  $singularity_image_expr         = hiera('singularity_image', 'SingularityImage')
-  $singularity_bind_paths         = hiera_array('singularity_bind_paths', 'SingularityBind')
-  $singularity_target_dir         = hiera('singularity_target_dir', '')
+  $use_singularity                = lookup('use_singularity', {default_value => false})
+  $singularity_path               = lookup('singularity_path', {default_value => '/usr/bin/singularity'})
+  $force_singularity_jobs         = lookup('force_singularity_jobs', {default_value => false})
+  $singularity_image_expr         = lookup('singularity_image', {default_value => 'SingularityImage'})
+  $singularity_bind_paths         = lookup('singularity_bind_paths', {merge => unique, default_value => 'SingularityBind'})
+  $singularity_target_dir         = lookup('singularity_target_dir', {default_value => ''})
 
   # Defrag settings
-  $defrag_interval                = hiera('defrag_interval', 600)
-  $defrag_draining_machines_per_hour = hiera('defrag_draining_machines_per_hour', 60)
-  $defrag_max_concurrent_draining = hiera('defrag_max_concurrent_draining', 8)
-  $defrag_max_whole_machines      = hiera('defrag_max_whole_machines', 20)
-  $defrag_schedule                = hiera('defrag_schedule', "graceful")
+  $defrag_interval                = lookup('defrag_interval', {default_value => 600})
+  $defrag_draining_machines_per_hour = lookup('defrag_draining_machines_per_hour', {default_value => 60})
+  $defrag_max_concurrent_draining = lookup('defrag_max_concurrent_draining', {default_value => 8})
+  $defrag_max_whole_machines      = lookup('defrag_max_whole_machines', {default_value => 20})
+  $defrag_schedule                = lookup('defrag_schedule', {default_value => "graceful"})
 
   # notification settings
-  $admin_email                    = hiera('admin_email', 'localhost')
-  $email_domain                   = hiera('email_domain', 'localhost')
+  $admin_email                    = lookup('admin_email', {default_value => 'localhost'})
+  $email_domain                   = lookup('email_domain', {default_value => 'localhost'})
   # template paths
-  $template_config_local          = hiera('template_config_local',
-  "${module_name}/condor_config.local.erb")
-  $template_security              = hiera('template_security', "${module_name}/10_security.config.erb"
-  )
-  $template_resourcelimits        = hiera('template_resourcelimits',
-  "${module_name}/12_resourcelimits.config.erb")
-  $template_queues                = hiera('template_queues', "${module_name}/13_queues.config.erb"
-  )
-  $template_schedd                = hiera('template_schedd', "${module_name}/21_schedd.config.erb"
-  )
-  $template_fairshares            = hiera('template_fairshares', "${module_name}/11_fairshares.config.erb"
-  )
-  $template_manager               = hiera('template_collector', "${module_name}/22_manager.config.erb"
-  )
-  $template_ganglia               = hiera('template_ganglia', "${module_name}/23_ganglia.config.erb"
-  )
-  $template_workernode            = hiera('template_workernode', "${module_name}/20_workernode.config.erb"
-  )
-  $template_defrag                = hiera('template_defrag', "${module_name}/33_defrag.config.erb"
-  )
-  $template_highavailability      = hiera('template_defrag', "${module_name}/30_highavailability.config.erb"
-  )
-  $template_sharedport            = hiera('template_sharedport', "${module_name}/27_shared_port.config.erb"
-  )
-  $template_logging               = hiera('template_logging', "${module_name}/14_logging.config.erb"
-  )
-  $template_singularity           = hiera('template_singularity', "${module_name}/50_singularity.config.erb"
-  )
+  $template_config_local          = lookup('template_config_local', {default_value => "${module_name}/condor_config.local.erb"})
+  $template_security              = lookup('template_security', {default_value => "${module_name}/10_security.config.erb"})
+  $template_resourcelimits        = lookup('template_resourcelimits', {default_value => "${module_name}/12_resourcelimits.config.erb"})
+  $template_queues                = lookup('template_queues', {default_value => "${module_name}/13_queues.config.erb"})
+  $template_schedd                = lookup('template_schedd', {default_value => "${module_name}/21_schedd.config.erb"})
+  $template_fairshares            = lookup('template_fairshares', {default_value => "${module_name}/11_fairshares.config.erb"})
+  $template_manager               = lookup('template_collector', {default_value => "${module_name}/22_manager.config.erb"})
+  $template_ganglia               = lookup('template_ganglia', {default_value => "${module_name}/23_ganglia.config.erb"})
+  $template_workernode            = lookup('template_workernode', {default_value => "${module_name}/20_workernode.config.erb"})
+  $template_defrag                = lookup('template_defrag', {default_value => "${module_name}/33_defrag.config.erb"})
+  $template_highavailability      = lookup('template_defrag', {default_value => "${module_name}/30_highavailability.config.erb"})
+  $template_sharedport            = lookup('template_sharedport', {default_value => "${module_name}/27_shared_port.config.erb"})
+  $template_logging               = lookup('template_logging', {default_value => "${module_name}/14_logging.config.erb"})
+  $template_singularity           = lookup('template_singularity', {default_value => "${module_name}/50_singularity.config.erb"})
 }

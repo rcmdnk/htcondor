@@ -73,6 +73,9 @@ HAD_USE_REPLICATION = true
 ## Default: $(SPOOL)/Accountantnew.log
 STATE_FILE = $(SPOOL)/Accountantnew.log
 
+## Add test file: Version to VALID_SPOOL_FILES
+VALID_SPOOL_FILES=$(VALID_SPOOL_FILES) Version
+
 ## Period of time between two successive awakenings of the replication daemon
 ## Default: 300
 REPLICATION_INTERVAL = 300

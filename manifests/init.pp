@@ -131,6 +131,7 @@ class htcondor (
   $health_check_script            = $htcondor::params::health_check_script,
   $include_username_in_accounting =
   $htcondor::params::include_username_in_accounting,
+  $primary_accounts               = $htcondor::params::primary_accounts,
   $install_repositories           = $htcondor::params::install_repositories,
   $gpgcheck                       = $htcondor::params::gpgcheck,
   $gpgkey                         = $htcondor::params::gpgkey,

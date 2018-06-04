@@ -13,6 +13,7 @@ class htcondor::config::common {
   $is_scheduler                   = $htcondor::is_scheduler
   $use_htcondor_account_mapping   = $htcondor::use_htcondor_account_mapping
   $include_username_in_accounting = $htcondor::include_username_in_accounting
+  $primary_accounts               = $htcondor::primary_accounts
 
   $leave_job_in_queue             = $htcondor::leave_job_in_queue
   $use_x509userproxy              = $htcondor::use_x509userproxy

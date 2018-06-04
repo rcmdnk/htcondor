@@ -44,7 +44,16 @@ ConcurrencyLimits = strcat(AcctGroup, ",", AcctSubGroup, ",", Owner)
 SUBMIT_EXPRS = $(SUBMIT_EXPRS) AcctGroup, AcctSubGroup, AccountingGroup, ConcurrencyLimits
 <% else -%>
 
-<% end %>
+<% end -%>
+
+<% if @primary_accounts.length > 0 -%>
+IsPrimaryJob = \
+<% @primary_accounts.each do |account| -%>
+  ifThenElse(regexp("<%= account %>",Owner), True,\
+<% end -%>
+False)))
+SUBMIT_EXPRS = $(SUBMIT_EXPRS) IsPrimaryJob
+<% end -%>
 
 <% unless @enable_condor_reporting -%>
 # disable reports to condor-admin@cs.wisc.edu (http://research.cs.wisc.edu/htcondor/privacy.html)

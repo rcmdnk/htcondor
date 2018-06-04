@@ -57,6 +57,7 @@ class htcondor::params {
 
   $health_check_script            = lookup('health_check_script', {default_value => "puppet:///modules/${module_name}/healhcheck_wn_condor"})
   $include_username_in_accounting = lookup('include_username_in_accounting', {default_value => false})
+  $primary_accounts               = lookup('primary_accounts', {merge => unique, default_value => []})
   $install_repositories           = lookup('install_repositories', {default_value => true})
   $gpgcheck                       = lookup('gpgcheck', {default_value => true})
   $gpgkey                         = lookup('gpgkey', {default_value => 'http://htcondor.org/yum/RPM-GPG-KEY-HTCondor'})

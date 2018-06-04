@@ -10,11 +10,8 @@ class htcondor::config::sharedport {
   $condor_user                = $htcondor::condor_user
   $condor_group               = $htcondor::condor_group
 
-  $now                        = strftime('%d.%m.%Y_%H.%M')
-
   # SharedPort service configuration
   file { '/etc/condor/config.d/27_shared_port.config':
-    backup  => ".bak.${now}",
     content => template($template_sharedport),
     require => Package['condor'],
     owner   => $condor_user,

@@ -21,11 +21,8 @@ class htcondor::config::common {
 
   $template_config_local          = $htcondor::template_config_local
 
-  $now                            = Timestamp().strftime('%d.%m.%Y_%H.%M')
-
   # files common between machines
   file { '/etc/condor/config.d/00_config_local.config':
-    backup  => ".bak.${now}",
     content => template($template_config_local),
     require => Package['condor'],
     owner   => $condor_user,

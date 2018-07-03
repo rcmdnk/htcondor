@@ -71,7 +71,6 @@ class htcondor::params {
   $slots                          = lookup('slots', {default_value => {}})
   $memory                         = lookup('memory', {default_value => ""})
   $job_renice_increment           = lookup('job_renice_increment', {default_value => 10})
-  $start                          = lookup('start', {default_value => ""})
   $memory_overcommit              = lookup('memory_overcommit', {default_value => 1.5})
   $request_memory                 = lookup('request_memory', {default_value => true})
 

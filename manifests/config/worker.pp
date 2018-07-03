@@ -21,7 +21,7 @@ class htcondor::config::worker {
   $slots                     = $htcondor::slots
   $memory                    = $htcondor::memory
   $job_renice_increment      = $htcondor::job_renice_increment
-  $start                     = $htcondor::start
+  $primary_accounts          = $htcondor::primary_accounts
   $starter_job_environment   = $htcondor::starter_job_environment
   $manage_selinux            = $htcondor::manage_selinux
   $pool_create               = $htcondor::pool_create

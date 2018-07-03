@@ -146,7 +146,6 @@ class htcondor (
   $slots                          = $htcondor::params::slots,
   $memory                         = $htcondor::params::memory,
   $job_renice_increment           = $htcondor::params::job_renice_increment,
-  $start                          = $htcondor::params::start,
   $memory_overcommit              = $htcondor::params::memory_overcommit,
   $request_memory                 = $htcondor::params::request_memory,
   $starter_job_environment        = $htcondor::params::starter_job_environment,

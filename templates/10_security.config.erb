@@ -68,7 +68,7 @@ ALLOW_DAEMON = $(ALLOW_DAEMON), \
                submit-side@matchsession/*, \
                execute-side@matchsession/*
 <% end -%>
-ALLOW_ADMINISTRATOR = root@$(UID_DOMAIN)/$(IP_ADDRESS), condor_pool@$(UID_DOMAIN)/$(IP_ADDRESS), $(CMS)
+ALLOW_ADMINISTRATOR = root@$(UID_DOMAIN)/$(IP_ADDRESS), condor_pool@$(UID_DOMAIN)/$(IP_ADDRESS), condor@$(UID_DOMAIN)/$(IP_ADDRESS), $(CMS)
 ALLOW_CONFIG = root@$(FULL_HOSTNAME)
 ALLOW_NEGOTIATOR = $(CMS)
 ALLOW_NEGOTIATOR_SCHEDD = $(CMS)

@@ -42,10 +42,6 @@ AcctGroup = strcat("group_", x509UserProxyVOName, ".", AcctSubGroup)
 AccountingGroup = $(AcctGroup)
 ConcurrencyLimits = strcat(AcctGroup, ",", AcctSubGroup, ",", Owner)
 SUBMIT_EXPRS = $(SUBMIT_EXPRS) AcctGroup, AcctSubGroup, AccountingGroup, ConcurrencyLimits
-<% else -%>
-
-<% end -%>
-
 <% if @primary_accounts.length > 0 -%>
 IsPrimaryJob = \
 <% @primary_accounts.each do |account| -%>
@@ -53,6 +49,7 @@ IsPrimaryJob = \
 <% end -%>
 False)))
 SUBMIT_EXPRS = $(SUBMIT_EXPRS) IsPrimaryJob
+<% end -%>
 <% end -%>
 
 <% unless @enable_condor_reporting -%>

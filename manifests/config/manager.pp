@@ -88,4 +88,12 @@ class htcondor::config::manager {
       notify  => Exec['/usr/sbin/condor_reconfig'],
     }
   }
+
+  $condor_directories = ['/etc/condor/persistent']
+  file { $condor_directories:
+    ensure => directory,
+    owner  => $condor_user,
+    group  => $condor_group,
+    mode   => '0644',
+  }
 }

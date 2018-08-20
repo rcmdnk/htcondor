@@ -94,7 +94,8 @@ class htcondor::config::worker {
 
   file { $condor_directories:
     ensure => directory,
-    owner  => 'condor',
+    owner  => $condor_user,
+    group  => $condor_group,
     mode   => '0644',
   }
 }

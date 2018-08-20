@@ -19,9 +19,9 @@ PRIVATE_NETWORK_NAME = <%= @private_network_name -%>
 TRUST_UID_DOMAIN = True
 <% end -%>
 
-<% if @persistent_config_dir -%>
+<% if @persistent_config -%>
 ENABLE_PERSISTENT_CONFIG = TRUE
-PERSISTENT_CONFIG_DIR = <%= @persistent_config_dir %>
+PERSISTENT_CONFIG_DIR = /etc/condor/persistent
 <% end -%>
 
 <% if @settable_attrs_administrator -%>

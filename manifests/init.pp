@@ -108,6 +108,8 @@ class htcondor (
   $accounting_groups              = $htcondor::params::accounting_groups,
   $cluster_has_multiple_domains   =
   $htcondor::params::cluster_has_multiple_domains,
+  $persistent_config_dir          = $htcondor::params::persistent_config_dir,
+  $settable_attrs_administrator   = $htcondor::params::settable_attrs_administrator,
   $collector_name                 = $htcondor::params::collector_name,
   $email_domain                   = $htcondor::params::email_domain,
   $schedulers                     = $htcondor::params::schedulers,

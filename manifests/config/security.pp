@@ -42,6 +42,8 @@ class htcondor::config::security (
 
   # /etc/condor/config.d/10_security.config
   $cluster_has_multiple_domains = $htcondor::cluster_has_multiple_domains
+  $persistent_config_dir        = $htcondor::persistent_config_dir
+  $settable_attrs_administrator = $htcondor::settable_attrs_administrator
   $default_domain_name          = $htcondor::default_domain_name
   $filesystem_domain            = $htcondor::filesystem_domain
   $is_worker                    = $htcondor::is_worker

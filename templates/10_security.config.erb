@@ -19,6 +19,15 @@ PRIVATE_NETWORK_NAME = <%= @private_network_name -%>
 TRUST_UID_DOMAIN = True
 <% end -%>
 
+<% if @persistent_config_dir -%>
+ENABLE_PERSISTENT_CONFIG = TRUE
+PERSISTENT_CONFIG_DIR = <%= @persistent_config_dir %>
+<% end -%>
+
+<% if @settable_attrs_administrator -%>
+SETTABLE_ATTRS_ADMINISTRATOR = $(SETTABLE_ATTRS_ADMINISTRATOR) <%= @settable_attrs_administrator %>
+<% end -%>
+
 # Machines & users
 <% if @manager_list then -%>
 CMS = \

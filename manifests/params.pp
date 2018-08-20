@@ -9,6 +9,8 @@ class htcondor::params {
   $is_worker                      = lookup('is_worker', {default_value => false})
 
   $cluster_has_multiple_domains   = lookup('cluster_has_multiple_domains', {default_value => false})
+  $persistent_config_dir          = lookup('persistent_config_dir', {default_value => ''})
+  $settable_attrs_administrator   = lookup('settable_attrs_administrator', {default_value => ''})
   $collector_name                 = lookup('collector_name', {default_value => 'Personal Condor at $(FULL_HOSTNAME)'})
   $repo_priority                  = lookup('repo_priority', {default_value => '99'})
   $condor_version                 = lookup('condor_version', {default_value => 'present'})

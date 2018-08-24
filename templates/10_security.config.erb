@@ -12,7 +12,9 @@ COLLECTOR_HOST = <%= @managers.flatten.join(', ') %>
 
 <% if @uses_connection_broker == true then -%>
 CCB_ADDRESS = $(COLLECTOR_HOST)
+<% if @private_network_name -%>
 PRIVATE_NETWORK_NAME = <%= @private_network_name -%>
+<% end -%>
 <% end -%>
 
 <% if @cluster_has_multiple_domains == true then -%>

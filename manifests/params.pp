@@ -133,7 +133,7 @@ class htcondor::params {
 
   # for private networks
   $uses_connection_broker         = lookup('uses_connection_broker', {default_value => false})
-  $private_network_name           = lookup('private_network_name', {default_value => $::domain})
+  $private_network_name           = lookup('private_network_name', {default_value => ''})
 
   # SharedPort service configuration
   $use_shared_port                = lookup('use_shared_port', {default_value => false})

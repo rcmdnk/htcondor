@@ -4,6 +4,8 @@ class htcondor::params {
   $managers                       = lookup('managers', {merge => unique, default_value => []})
   $workers                        = lookup('workers', {merge => unique, default_value => []})
 
+  $service                        = lookup('service', {default_value => true})
+
   $is_manager                     = lookup('is_manager', {default_value => false})
   $is_scheduler                   = lookup('is_scheduler', {default_value => false})
   $is_worker                      = lookup('is_worker', {default_value => false})

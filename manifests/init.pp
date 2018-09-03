@@ -169,6 +169,7 @@ class htcondor (
   $filesystem_domain              = $htcondor::params::filesystem_domain,
   $use_accounting_groups          = $htcondor::params::use_accounting_groups,
   $workers                        = $htcondor::params::workers,
+  $service                        = $htcondor::params::service,
   # default params
   $condor_user                    = root,
   $condor_group                   = root,
@@ -249,15 +250,13 @@ class htcondor (
     Class['htcondor::repositories'] -> Class['htcondor::install']
   }
 
-  class { 'htcondor::install':
-  }
+  class { 'htcondor::install': }
+  Class['htcondor::install'] -> Class['htcondor::config']
 
-  class { 'htcondor::config':
-  }
+  class { 'htcondor::config': }
 
-  class { 'htcondor::service':
+  if $service {
+    Class['htcondor::config'] -> Class['htcondor::service']
+    class { 'htcondor::service': }
   }
-
-  Class['htcondor::install'] -> Class['htcondor::config'] -> Class['htcondor::service'
-    ]
 }

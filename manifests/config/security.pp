@@ -86,7 +86,6 @@ class htcondor::config::security (
     owner   => $condor_user,
     group   => $condor_group,
     mode    => '0644',
-    notify  => Exec['/usr/sbin/condor_reconfig'],
   }
 
   if $use_password_auth {

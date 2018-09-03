@@ -38,7 +38,6 @@ class htcondor::config::manager {
       owner   => $condor_user,
       group   => $condor_group,
       mode    => '0644',
-      notify  => Exec['/usr/sbin/condor_reconfig'],
     }
   }
 
@@ -48,7 +47,6 @@ class htcondor::config::manager {
     owner   => $condor_user,
     group   => $condor_group,
     mode    => '0644',
-    notify  => Exec['/usr/sbin/condor_reconfig'],
   }
 
   if $ganglia_cluster_name {
@@ -58,7 +56,6 @@ class htcondor::config::manager {
       owner   => $condor_user,
       group   => $condor_group,
       mode    => '0644',
-      notify  => Exec['/usr/sbin/condor_reconfig'],
     }
   }
 
@@ -69,7 +66,6 @@ class htcondor::config::manager {
       owner   => $condor_user,
       group   => $condor_group,
       mode    => '0644',
-      notify  => Exec['/usr/sbin/condor_reconfig'],
     }
   }
 
@@ -85,7 +81,6 @@ class htcondor::config::manager {
       owner   => $condor_user,
       group   => $condor_group,
       mode    => '0644',
-      notify  => Exec['/usr/sbin/condor_reconfig'],
     }
   }
 

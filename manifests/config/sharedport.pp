@@ -17,6 +17,5 @@ class htcondor::config::sharedport {
     owner   => $condor_user,
     group   => $condor_group,
     mode    => '0644',
-    notify  => Exec['/usr/sbin/condor_reconfig'],
   }
 }

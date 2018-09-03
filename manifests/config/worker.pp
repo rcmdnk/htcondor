@@ -45,7 +45,6 @@ class htcondor::config::worker {
     owner   => $condor_user,
     group   => $condor_group,
     mode    => '0644',
-    notify  => Exec['/usr/sbin/condor_reconfig'],
   }
 
   if $use_singularity {
@@ -55,7 +54,6 @@ class htcondor::config::worker {
       owner   => $condor_user,
       group   => $condor_group,
       mode    => '0644',
-      notify  => Exec['/usr/sbin/condor_reconfig'],
     }
   }
 

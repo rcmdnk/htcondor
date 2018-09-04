@@ -144,6 +144,7 @@ class htcondor (
   $machine_owner                  = $htcondor::params::machine_owner,
   $managers                       = $htcondor::params::managers,
   $number_of_cpus                 = $htcondor::params::number_of_cpus,
+  $start                          = $htcondor::params::start,
   $partitionable_slots            = $htcondor::params::partitionable_slots,
   $slots                          = $htcondor::params::slots,
   $memory                         = $htcondor::params::memory,

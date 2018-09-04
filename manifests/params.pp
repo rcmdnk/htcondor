@@ -70,6 +70,7 @@ class htcondor::params {
   $machine_owner                  = lookup('machine_owner', {default_value => 'physics'})
 
   $number_of_cpus                 = lookup('number_of_cpus', {default_value => $::processors['count' ]})
+  $start                          = lookup('start', {default_value => ''})
 
   $partitionable_slots            = lookup('partitionable_slots', {default_value => true})
   $slots                          = lookup('slots', {default_value => {}})

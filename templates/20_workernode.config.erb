@@ -41,13 +41,17 @@ STARTD_CRON_WN_HEALTHCHECK_RECONFIG = false
 STARTD_CRON_WN_HEALTHCHECK_KILL = true
 
 ## When is this node willing to run jobs?
-<% if @primary_accounts.length > 0 -%>
+<% if @start != "" -%>
+START = (NODE_IS_HEALTHY =?= True) && (StartJobs =?= True) && (<%= @start %>)
+<% elsif @primary_accounts.length > 0 -%>
 START = (NODE_IS_HEALTHY =?= True) && (StartJobs =?= True) && ((SlotID == 1) || IsPrimaryJob =!= True)
 <% else -%>
 START = (NODE_IS_HEALTHY =?= True) && (StartJobs =?= True)
 <% end -%>
 <% else -%>
-<% if @primary_accounts.length > 0 -%>
+<% if @start != "" -%>
+START = (StartJobs =?= True) && (<%= @start %>)
+<% elsif @primary_accounts.length > 0 -%>
 START = (StartJobs =?= True) && ((SlotID == 1) || IsPrimaryJob =!= True)
 <% else -%>
 START = (StartJobs =?= True)

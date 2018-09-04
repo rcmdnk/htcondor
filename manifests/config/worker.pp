@@ -17,6 +17,7 @@ class htcondor::config::worker {
   $machine_owner             = $htcondor::machine_owner
   $memory_overcommit         = $htcondor::memory_overcommit
   $number_of_cpus            = $htcondor::number_of_cpus
+  $start                     = $htcondor::start
   $partitionable_slots       = $htcondor::partitionable_slots
   $slots                     = $htcondor::slots
   $memory                    = $htcondor::memory

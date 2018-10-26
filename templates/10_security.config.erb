@@ -26,7 +26,7 @@ ENABLE_PERSISTENT_CONFIG = TRUE
 PERSISTENT_CONFIG_DIR = /etc/condor/persistent
 <% end -%>
 
-<% if @settable_attrs_administrator -%>
+<% if @settable_attrs_administrator != '' -%>
 SETTABLE_ATTRS_ADMINISTRATOR = $(SETTABLE_ATTRS_ADMINISTRATOR) <%= @settable_attrs_administrator %>
 <% end -%>
 

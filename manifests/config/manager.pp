@@ -14,6 +14,7 @@ class htcondor::config::manager {
   $group_accept_surplus  = $htcondor::group_accept_surplus
   $group_autoregroup     = $htcondor::group_autoregroup
   $high_priority_groups  = $htcondor::high_priority_groups
+  $multicore_priority    = $htcondor::multicore_priority
   $priority_halflife     = $htcondor::priority_halflife
   # /etc/condor/config.d/22_manager.config
   $collector_name        = $htcondor::collector_name

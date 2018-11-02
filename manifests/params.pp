@@ -40,6 +40,7 @@ class htcondor::params {
 
 
   $high_priority_groups           = lookup('high_priority_groups', {merge => hash, default_value => undef})
+  $multicore_priority             = lookup('multicore_priority', {default_value => -2})
 
   $default_accounting_groups      = {
     'CMS'            => {

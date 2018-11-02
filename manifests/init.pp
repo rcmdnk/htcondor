@@ -126,6 +126,7 @@ class htcondor (
   $enable_healthcheck             = $htcondor::params::enable_healthcheck,
   $htcondor_cgroup                = $htcondor::params::htcondor_cgroup,
   $high_priority_groups           = $htcondor::params::high_priority_groups,
+  $multicore_priority             = $htcondor::params::multicore_priority,
   $priority_halflife              = $htcondor::params::priority_halflife,
   $default_prio_factor            = $htcondor::params::default_prio_factor,
   $group_accept_surplus           = $htcondor::params::group_accept_surplus,

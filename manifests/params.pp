@@ -4,6 +4,9 @@ class htcondor::params {
   $managers                       = lookup('managers', {merge => unique, default_value => []})
   $workers                        = lookup('workers', {merge => unique, default_value => []})
 
+  $collector_port                 = lookup('collector_port', {default_value => ''})
+
+
   $service                        = lookup('service', {default_value => true})
 
   $is_manager                     = lookup('is_manager', {default_value => false})

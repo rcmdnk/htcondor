@@ -144,6 +144,7 @@ class htcondor (
   $is_worker                      = $htcondor::params::is_worker,
   $machine_owner                  = $htcondor::params::machine_owner,
   $managers                       = $htcondor::params::managers,
+  $collector_port                 = $htcondor::params::collector_port,
   $number_of_cpus                 = $htcondor::params::number_of_cpus,
   $start                          = $htcondor::params::start,
   $partitionable_slots            = $htcondor::params::partitionable_slots,

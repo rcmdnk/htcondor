@@ -9,6 +9,7 @@ FILESYSTEM_DOMAIN = <%= @filesystem_domain %>
 <% end -%>
 
 COLLECTOR_HOST = <%= @managers.flatten.join(', ') %>
+COLLECTOR_PORT = <%= @collector_port %>
 
 <% if @uses_connection_broker == true then -%>
 CCB_ADDRESS = $(COLLECTOR_HOST)

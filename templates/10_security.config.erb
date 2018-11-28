@@ -9,7 +9,7 @@ FILESYSTEM_DOMAIN = <%= @filesystem_domain %>
 <% end -%>
 
 COLLECTOR_HOST = <%= @managers.flatten.join(', ') %>
-<% if @collector_port -%>
+<% if @collector_port != '' -%>
 COLLECTOR_PORT = <%= @collector_port %>
 <% end -%>
 

@@ -173,6 +173,7 @@ class htcondor (
   $use_accounting_groups          = $htcondor::params::use_accounting_groups,
   $workers                        = $htcondor::params::workers,
   $service                        = $htcondor::params::service,
+  $config                         = $htcondor::params::config ,
   # default params
   $condor_user                    = root,
   $condor_group                   = root,
@@ -254,12 +255,20 @@ class htcondor (
   }
 
   class { 'htcondor::install': }
-  Class['htcondor::install'] -> Class['htcondor::config']
 
-  class { 'htcondor::config': }
+  if $config {
+    Class['htcondor::install'] -> Class['htcondor::config']
+    class { 'htcondor::config': }
+  }
+
 
   if $service {
-    Class['htcondor::config'] -> Class['htcondor::service']
-    class { 'htcondor::service': }
+    if $config {
+      Class['htcondor::config'] -> Class['htcondor::service']
+      class { 'htcondor::service': }
+    }else{
+      Class['htcondor::install'] -> Class['htcondor::service']
+      class { 'htcondor::service': }
+    }
   }
 }

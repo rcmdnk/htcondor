@@ -8,6 +8,7 @@ class htcondor::params {
 
 
   $service                        = lookup('service', {default_value => true})
+  $config                         = lookup('config', {default_value => true})
 
   $is_manager                     = lookup('is_manager', {default_value => false})
   $is_scheduler                   = lookup('is_scheduler', {default_value => false})

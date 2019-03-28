@@ -3,6 +3,8 @@
 # Provides yum repositories for HTCondor installation
 class htcondor::repositories {
   $dev_repos       = $htcondor::dev_repositories
+  $prev_repos      = $htcondor::prev_repositories
+  $stable_version  = $htcondor::stable_version
   $gpgcheck        = $htcondor::gpgcheck
   $gpgkey          = $htcondor::gpgkey
   $condor_priority = $htcondor::condor_priority
@@ -11,27 +13,27 @@ class htcondor::repositories {
   case $::osfamily {
     'RedHat'  : {
       if $dev_repos {
-        yumrepo { 'htcondor-development':
-          descr    => "HTCondor Development RPM Repository for Redhat Enterprise Linux ${facts['os']['release']['major']}",
-          baseurl  => 'http://research.cs.wisc.edu/htcondor/yum/development/rhel$releasever',
-          enabled  => 1,
-          gpgcheck => bool2num($gpgcheck),
-          gpgkey   => $gpgkey,
-          priority => $condor_priority,
-          exclude  => 'condor.i386, condor.i686',
-          before   => [Package['condor']],
-        }
+        $repo    = 'htcondor-development'
+        $descr   =  "HTCondor Development RPM Repository for Redhat Enterprise Linux ${facts['os']['release']['major']}"
+        $baseurl = 'http://research.cs.wisc.edu/htcondor/yum/development/rhel$releasever'
+      } elsif $prev_repos {
+        $repo    = 'htcondor-stable'
+        $descr   = "HTCondor Stable RPM Repository for Redhat Enterprise Linux ${facts['os']['release']['major']}"
+        $baseurl = 'http://research.cs.wisc.edu/htcondor/yum/stable/rhel$releasever'
       } else {
-        yumrepo { 'htcondor-stable':
-          descr    => "HTCondor Stable RPM Repository for Redhat Enterprise Linux ${facts['os']['release']['major']}",
-          baseurl  => 'http://research.cs.wisc.edu/htcondor/yum/stable/rhel$releasever',
-          enabled  => 1,
-          gpgcheck => bool2num($gpgcheck),
-          gpgkey   => $gpgkey,
-          priority => $condor_priority,
-          exclude  => 'condor.i386, condor.i686',
-          before   => [Package['condor']],
-        }
+        $repo    = 'htcondor-stable'
+        $descr   = "HTCondor Stable RPM Repository for Redhat Enterprise Linux ${facts['os']['release']['major']}"
+        $baseurl = 'http://research.cs.wisc.edu/htcondor/yum/stable/${stable_version}/rhel$releasever'
+      }
+      yumrepo { $repo:
+        descr    => $descr,
+        baseurl  => $baseurl,
+        enabled  => 1,
+        gpgcheck => bool2num($gpgcheck),
+        gpgkey   => $gpgkey,
+        priority => $condor_priority,
+        exclude  => 'condor.i386, condor.i686',
+        before   => [Package['condor']],
       }
     }
     'Debian'  : {

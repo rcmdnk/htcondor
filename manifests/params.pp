@@ -71,6 +71,8 @@ class htcondor::params {
   $gpgcheck                       = lookup('gpgcheck', {default_value => true})
   $gpgkey                         = lookup('gpgkey', {default_value => 'http://htcondor.org/yum/RPM-GPG-KEY-HTCondor'})
   $dev_repositories               = lookup('dev_repositories', {default_value => false})
+  $prev_repositories              = lookup('prev_repositories', {default_value => false})
+  $stable_version                 = lookup('stable_version', {default_value => '8.8'})
 
   $machine_owner                  = lookup('machine_owner', {default_value => 'physics'})
 

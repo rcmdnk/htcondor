@@ -139,6 +139,8 @@ class htcondor (
   $gpgcheck                       = $htcondor::params::gpgcheck,
   $gpgkey                         = $htcondor::params::gpgkey,
   $dev_repositories               = $htcondor::params::dev_repositories,
+  $prev_repositories              = $htcondor::params::prev_repositories,
+  $stable_version                 = $htcondor::params::stable_version,
   $is_scheduler                   = $htcondor::params::is_scheduler,
   $is_manager                     = $htcondor::params::is_manager,
   $is_worker                      = $htcondor::params::is_worker,

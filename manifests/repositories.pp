@@ -13,17 +13,17 @@ class htcondor::repositories {
   case $::osfamily {
     'RedHat'  : {
       if $dev_repos {
-        $repo    = 'htcondor-development'
-        $descr   =  "HTCondor Development RPM Repository for Redhat Enterprise Linux ${facts['os']['release']['major']}"
-        $baseurl = 'http://research.cs.wisc.edu/htcondor/yum/development/rhel$releasever'
+        $repo    = "htcondor-development"
+        $descr   = "HTCondor Development RPM Repository for Redhat Enterprise Linux ${facts['os']['release']['major']}"
+        $baseurl = "http://research.cs.wisc.edu/htcondor/yum/development/rhel$releasever"
       } elsif $prev_repos {
-        $repo    = 'htcondor-stable'
+        $repo    = "htcondor-stable"
         $descr   = "HTCondor Stable RPM Repository for Redhat Enterprise Linux ${facts['os']['release']['major']}"
-        $baseurl = 'http://research.cs.wisc.edu/htcondor/yum/stable/rhel$releasever'
+        $baseurl = "http://research.cs.wisc.edu/htcondor/yum/stable/rhel$releasever"
       } else {
-        $repo    = 'htcondor-stable'
+        $repo    = "htcondor-stable"
         $descr   = "HTCondor Stable RPM Repository for Redhat Enterprise Linux ${facts['os']['release']['major']}"
-        $baseurl = 'http://research.cs.wisc.edu/htcondor/yum/stable/${stable_version}/rhel$releasever'
+        $baseurl = "http://research.cs.wisc.edu/htcondor/yum/stable/${stable_version}/rhel$releasever"
       }
       yumrepo { $repo:
         descr    => $descr,

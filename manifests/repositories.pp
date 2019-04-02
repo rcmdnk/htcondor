@@ -14,20 +14,20 @@ class htcondor::repositories {
     'RedHat'  : {
       if $dev_repos {
         $repo    = "htcondor-development"
-        $descr   = "HTCondor Development RPM Repository for Redhat Enterprise Linux ${facts['os']['release']['major']}"
-        $baseurl = "http://research.cs.wisc.edu/htcondor/yum/development/rhel${releasever}"
+        $descr   = "HTCondor Development RPM Repository for Redhat Enterprise Linux ${major_release}"
+        $baseurl = "http://research.cs.wisc.edu/htcondor/yum/development"
       } elsif $prev_repos {
         $repo    = "htcondor-stable"
-        $descr   = "HTCondor Stable RPM Repository for Redhat Enterprise Linux ${facts['os']['release']['major']}"
-        $baseurl = "http://research.cs.wisc.edu/htcondor/yum/stable/rhel${releasever}"
+        $descr   = "HTCondor Stable RPM Repository for Redhat Enterprise Linux  ${major_release}"
+        $baseurl = "http://research.cs.wisc.edu/htcondor/yum/stable"
       } else {
         $repo    = "htcondor-stable"
-        $descr   = "HTCondor Stable RPM Repository for Redhat Enterprise Linux ${facts['os']['release']['major']}"
-        $baseurl = "http://research.cs.wisc.edu/htcondor/yum/stable/${stable_version}/rhel${releasever}"
+        $descr   = "HTCondor Stable RPM Repository for Redhat Enterprise Linux ${major_release}"
+        $baseurl = "http://research.cs.wisc.edu/htcondor/yum/stable/${stable_version}"
       }
       yumrepo { $repo:
         descr    => $descr,
-        baseurl  => $baseurl,
+        baseurl  => "${baseurl}/rhel${major_release}",
         enabled  => 1,
         gpgcheck => bool2num($gpgcheck),
         gpgkey   => $gpgkey,

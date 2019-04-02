@@ -8,7 +8,7 @@ class htcondor::repositories {
   $gpgcheck        = $htcondor::gpgcheck
   $gpgkey          = $htcondor::gpgkey
   $condor_priority = $htcondor::condor_priority
-  $major_release   = regsubst($::operatingsystemrelease, '^(\d+)\.\d+$', '\1')
+  $major_release   = $facts['os']['release']['major']
 
   case $::osfamily {
     'RedHat'  : {

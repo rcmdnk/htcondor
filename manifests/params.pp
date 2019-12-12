@@ -100,6 +100,7 @@ class htcondor::params {
   $max_walltime                   = lookup('max_walltime', {default_value => '80 * 60 * 60'})
   $max_cputime                    = lookup('max_cputime', {default_value => '80 * 60 * 60'})
   $memory_factor                  = lookup('memory_factor', {default_value => '1000'})
+  $additional_periodic_remove     = lookup('additional_periodic_remove', {default_value => ''})
 
   $ganglia_cluster_name           = lookup('ganglia_cluster_name', {default_value => undef})
 

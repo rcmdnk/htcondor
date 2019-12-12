@@ -20,3 +20,7 @@ SYSTEM_PERIODIC_REMOVE = $(RemoveDefaultJobWallTime) || \
                          $(RemoveHeldJobs)           || \
                          $(RemoveMemoryUsage)        || \
                          $(RemoveMultipleRunJobs)
+
+<% if @additional_periodic_remove != "" -%>
+SYSTEM_PERIODIC_REMOVE = "<%= @additional_periodic_remove %>" || $(SYSTEM_PERIODIC_REMOVE)
+<% end -%>

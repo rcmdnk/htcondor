@@ -10,6 +10,7 @@ class htcondor::config::scheduler {
   $max_walltime               = $htcondor::max_walltime
   $max_cputime                = $htcondor::max_cputime
   $memory_factor              = $htcondor::memory_factor
+  $additional_periodic_remove = $htcondor::additional_periodic_remove
   # /etc/condor/config.d/13_queues.config
   $queues                     = $htcondor::queues
   $periodic_expr_interval     = $htcondor::periodic_expr_interval

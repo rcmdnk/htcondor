@@ -8,13 +8,15 @@ DEFRAG_SCHEDULE = <%= @defrag_schedule %>
 DEFRAG.SETTABLE_ATTRS_ADMINISTRATOR = DEFRAG_MAX_CONCURRENT_DRAINING,DEFRAG_RANK,DEFRAG_DRAINING_MACHINES_PER_HOUR,DEFRAG_MAX_WHOLE_MACHINES,DEFRAG_WHOLE_MACHINE_EXPR
 ENABLE_RUNTIME_CONFIG = TRUE
 
+<% if @defrag_fixed_multicore != 0 -%>
 ## Which machines are more desirable to drain
-DEFRAG_RANK = ifThenElse(Cpus >= 8, -10, (TotalCpus - Cpus)/(8.0 - Cpus))
+DEFRAG_RANK = ifThenElse(Cpus >= <%= @defrag_fixed_multicore %>, -10, (TotalCpus - Cpus)/(<%= @defrag_fixed_multicore %> - Cpus))
 
-# Define a whole machine to be anything with 8 cores.
+# Define a whole machine to be anything with <%= @defrag_fixed_multicore %> cores.
 # Prevents us from draining off a full machine since we know we need
-# at most 8 cores.
-DEFRAG_WHOLE_MACHINE_EXPR = ((Cpus == TotalCpus) || (Cpus >= 8)) && StartJobs =?= True
+# at most <%= @defrag_fixed_multicore %> cores.
+DEFRAG_WHOLE_MACHINE_EXPR = ((Cpus == TotalCpus) || (Cpus >= <%= @defrag_fixed_multicore %>)) && StartJobs =?= True
+<% end -%>
 
 # Decide which machines to drain
 # # - must not be cloud machines

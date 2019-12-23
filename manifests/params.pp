@@ -170,6 +170,7 @@ class htcondor::params {
   $defrag_max_concurrent_draining = lookup('defrag_max_concurrent_draining', {default_value => 8})
   $defrag_max_whole_machines      = lookup('defrag_max_whole_machines', {default_value => 20})
   $defrag_schedule                = lookup('defrag_schedule', {default_value => "graceful"})
+  $defrag_fixed_multicore         = lookup('defrag_fixed_multicore', {default_value => 0})
 
   # notification settings
   $admin_email                    = lookup('admin_email', {default_value => 'localhost'})

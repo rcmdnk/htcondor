@@ -25,6 +25,7 @@ class htcondor::config::manager {
   $defrag_max_concurrent_draining    = $htcondor::defrag_max_concurrent_draining
   $defrag_max_whole_machines         = $htcondor::defrag_max_whole_machines
   $defrag_schedule                   = $htcondor::defrag_schedule
+  $defrag_fixed_multicore            = $htcondor::defrag_fixed_multicore
   # template files
   $template_defrag       = $htcondor::template_defrag
   $template_fairshares   = $htcondor::template_fairshares

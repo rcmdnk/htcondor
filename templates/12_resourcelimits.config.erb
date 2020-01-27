@@ -22,5 +22,5 @@ SYSTEM_PERIODIC_REMOVE = $(RemoveDefaultJobWallTime) || \
                          $(RemoveMultipleRunJobs)
 
 <% if @additional_periodic_remove != "" -%>
-SYSTEM_PERIODIC_REMOVE = "<%= @additional_periodic_remove %>" || $(SYSTEM_PERIODIC_REMOVE)
+SYSTEM_PERIODIC_REMOVE = <%= @additional_periodic_remove %> || $(SYSTEM_PERIODIC_REMOVE)
 <% end -%>
